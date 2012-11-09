@@ -52,7 +52,7 @@ say $lon;
 
 sub query_api {
     my ($lat, $lon) = @_;
-    my $query_string = "GET /api/e5df4405be67dec2/geolookup/q/$lat,$lon.xml\r\n\r\n";
+    my $query_string = "GET /api/e5df4405be67dec2/conditions/q/$lat,$lon.xml\r\n\r\n";
     my $wunderground = "38.102.136.138";
     socket(my $wundersock, AF_INET, SOCK_STREAM, $protocol);
     connect($wundersock, sockaddr_in(80, inet_aton($wunderground)));
@@ -67,7 +67,7 @@ sub query_api {
 }
 
 my $response = query_api($lat, $lon);
-say $response;
+send($client_con, $response, 0);
 
 
 
